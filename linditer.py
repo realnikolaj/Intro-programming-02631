@@ -69,7 +69,7 @@ def LindIter(System, N):
              
         else:
              
-            LindenmayerString = S
+            LindenmayerString = A
              
         if N > 1:
           
@@ -77,12 +77,12 @@ def LindIter(System, N):
         
                 if c & 1 == 0:
                   
-                    LindenmayerString += L+S
+                    LindenmayerString = B+R+LindenmayerString+R+B
                     c = 1
                   
                 else:
                    
-                    LindenmayerString += R+S
+                    LindenmayerString = A+L+LindenmayerString+L+A
                     c = 0
          
     return LindenmayerString
