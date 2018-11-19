@@ -18,5 +18,13 @@ class TestLindenmayer(unittest.TestCase):
         self.assertIs(LindIter('Korch', 2), S+'L'+S)
         self.assertIs(LindIter('Korch', 3), S+'L'+S+'R'+S)
 
+    #def test_string(self):
+     #   A = 'BRARB'
+      #  B = 'ALBLA'
+       # self.assertIs(LindIter('Korch', 0), '')
+        #self.assertIs(LindIter('Korch', 1), S)
+        #self.assertIs(LindIter('Korch', 2), S+'L'+S)
+        #self.assertIs(LindIter('Korch', 3), S+'L'+S+'R'+S)
+        
 if __name__ == '__main__':
     unittest.main()
