@@ -7,34 +7,57 @@ Created on Mon Nov 19 21:03:31 2018
 """
 
 import numpy as np
+import math
+
+
+
 
 
 def turtleGraph(LindenmayerString):
     
-    S = 1
-    L = 1/3*np.pi
-    R = -2/3*np.pi
+
     
-    System = 'Korch'
     
     turtleCommands = np.array([])
     
 
-    if System == 'Borch':
+    if 'SLS' in LindenmayerString:
         
-        LindenmayerString.replace('S', S)
-        LindenmayerString.replace('L', L)
-        LindenmayerString.replace('R', R)
+        for letter in LindenmayerString:
+            
+            if letter == 'S':
+            
+                turtleCommands = np.append(turtleCommands, 1)
+                
+            elif letter == 'L':
+                
+                turtleCommands = np.append(turtleCommands, (1/3)*math.pi)
 
-    if System == 'Sierpinski':
+            elif letter == 'S':
+                
+                turtleCommands = np.append(turtleCommands, -(2/3)*math.pi)        
         
-        turtleCommands = turtleCommands.replace('S', S)
-        turtleCommands = turtleCommands.replace('L', L)
-        turtleCommands = turtleCommands.replace('R', R/2)
+
+
+    if 'ALBLA' in LindenmayerString:
+        
+        for letter in LindenmayerString:
+        
+            if letter == 'A' or letter == 'B':
+            
+                turtleCommands = np.append(turtleCommands, 1)
+                
+            elif letter == 'L':
+                
+                turtleCommands = np.append(turtleCommands, (1/3)*math.pi)
+
+            elif letter == 'R':
+                
+                turtleCommands = np.append(turtleCommands, -(1/3)*math.pi)  
         
         
-    for letter in LindenmayerString:
-        print(letter)
+    #for letter in LindenmayerString:
+       # print(letter)
       #  if i == 'S':
           #  turtleCommands[range[i]] = S
         
