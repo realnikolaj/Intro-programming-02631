@@ -33,7 +33,7 @@ def turtleGraph(LindenmayerString):
                 
                 turtleCommands = np.append(turtleCommands, (1/3)*math.pi)
 
-            elif letter == 'S':
+            elif letter == 'R':
                 
                 turtleCommands = np.append(turtleCommands, -(2/3)*math.pi)        
         
@@ -55,18 +55,5 @@ def turtleGraph(LindenmayerString):
                 
                 turtleCommands = np.append(turtleCommands, -(1/3)*math.pi)  
         
-        
-    #for letter in LindenmayerString:
-       # print(letter)
-      #  if i == 'S':
-          #  turtleCommands[range[i]] = S
-        
-       # elif i == 'L':
-         #   turtleCommands[range[i]] = L
-            
-       # elif i == 'R':
-          #  turtleCommands[range[i]] = R
-            
-        #turtleCommands = np.append(turtleCommands, i)
     
     return turtleCommands
