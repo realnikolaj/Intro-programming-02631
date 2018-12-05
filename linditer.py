@@ -75,7 +75,6 @@ def LindIter(System, N):
                     
                 if letter == 'A':
                     add += A
-                       
                             
                 elif letter == 'B':
                     add += B
