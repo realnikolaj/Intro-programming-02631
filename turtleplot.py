@@ -7,6 +7,7 @@ Created on Wed Dec  5 21:30:48 2018
 """
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 def turtlePlot(turtleCommands):
     
@@ -23,7 +24,20 @@ def turtlePlot(turtleCommands):
     # and creates a single array for accessing angles
     angles = np.array([turtleCommands[i] for i in range(len(turtleCommands)) if i % 2 == 1])
     
-    length = np.array([turtleCommands[i]/2 for i in range(len(turtleCommands)) if i % 2 == 0])
+    
+    # Correct line-segment length according to system
+    # Will assess if system is korch or sierpinski
+    # divides lengths with respectively (1/3)^N and (1/2)^N
+    while True:
+        for i in turtleCommands[1]:
+            if -2/3*math.pi in i:
+                length = np.array([turtleCommands[i]/((3)**4) for i in range(len(turtleCommands)) if i % 2 == 0])
+                break
+    
+    
+    
+    # Diveds length
+    length = np.array([turtleCommands[i]/((3)**4) for i in range(len(turtleCommands)) if i % 2 == 0])
     
 
     # Calculate next direction vector 'Orientation'
@@ -45,21 +59,30 @@ def turtlePlot(turtleCommands):
         
     
     # Calculate next vector to be plottet
-    for i in range(1,len(length)):
+    for i in range(0,len(length)):
         
         #Calculate the vector
-        vector = np.array(xy[:,i-1]+length[i]*Orientation[:,i], copy=False, subok=True, ndmin=2).T
+        vector = np.array(xy[:,i]+length[i]*Orientation[:,i], copy=False, subok=True, ndmin=2).T
 
         # Appending the new vector to vector 'xy' array
         xy = np.concatenate((xy, vector), axis=1)
         
-        
+#    xy = np.concatenate( (np.array([[0],[0]]), xy), axis=1)    
     # Plotting with matplotlib
-    plt.plot(xy[1].T)
+    
+    
+    # Deals with zero iterations ie. N=0
+    # Will draw a horizontal line for both systems if N<1
+    if len(turtleCommands) < 1:
+        xy = np.array( [[0,1], [0,0]] )
+        
+        
+    plt.plot(xy[0], xy[1])
     plt.ylabel('Korch')
     plt.show()
 
     return
+
         
 
 # Below line is for testing purpose
