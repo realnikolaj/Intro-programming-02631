@@ -31,7 +31,6 @@ def LindIter(System, N):
         if N == 0:
              
             LindenmayerString = '' 
-            print('linesegment')
              
          # Otherwise set LindemayerString variable to first iteration     
         else:
@@ -60,7 +59,6 @@ def LindIter(System, N):
         if N == 0:
             
             LindenmayerString = '' 
-            print('linesegment')
                  
         else:
                  

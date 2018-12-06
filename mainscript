@@ -8,4 +8,64 @@ Created on Wed Dec  5 21:28:42 2018
 
 from turtlegraph import*
 from linditer import*
+from inputNumber import*
+from displayNumber import*
 
+
+# Define main menu options
+menuItems = np.array(["System menu", "Generate Plot", "Quit"])
+
+# Define sub menu "systems"
+systemsItems = np.array(["Korch", "Sierpinski", "Iterations", "Return"])
+
+# Define sub menu "iterations"
+systemsItems = np.array(["1", "2", "3"])
+
+
+# Display main menu
+while True:
+    
+    # Display the title of the current menu
+    print("Main menu")
+    # Display menu options and ask user to choose a menu item
+    Choice = displayMenu(menuItems)
+    # Menu item chosen
+
+    # 1. Choose system and iterations
+    if choice == 1:
+        
+        
+        
+        while True:
+                
+            # Display submenu "systems"
+            systemChoice = displayMenu(systemItems)
+            
+            if systemChoice == 1:
+                System = systemItems[0]
+            elif systemChoice == 2:
+                System = systemsItems[1]
+            elif systemChoice == 3:
+                N = input('Please input number of iterations')
+            elif systemChoice == 4:
+                break
+            
+
+    # 2. Generate plots
+    elif choice == 2:
+        
+        # Is name empty?
+        if System == "":
+            # Display error message
+            print("Error: No system selected")
+        elif N < 0:
+            # Display error message
+            print('Not possible to display negative order')
+        else:
+            # Display plot
+            turtlePlot(turtleGraph(LindIter(System, N)), System, N)
+            
+
+    # 3. Quit
+    elif choice == 3:
+        break

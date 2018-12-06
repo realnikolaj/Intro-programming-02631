@@ -13,7 +13,7 @@ import math
 
 
 
-def turtleGraph(LindenmayerString):
+def turtleGraph(LindenmayerString, N):
     
 
     
@@ -42,18 +42,23 @@ def turtleGraph(LindenmayerString):
     if 'ALBLA' in LindenmayerString:
         
         for letter in LindenmayerString:
+
         
             if letter == 'A' or letter == 'B':
             
                 turtleCommands = np.append(turtleCommands, 1)
                 
-            elif letter == 'L':
+            elif letter == 'L':         
                 
                 turtleCommands = np.append(turtleCommands, (1/3)*math.pi)
 
             elif letter == 'R':
                 
                 turtleCommands = np.append(turtleCommands, -(1/3)*math.pi)  
+    
+
+                
+        
         
     
     return turtleCommands
