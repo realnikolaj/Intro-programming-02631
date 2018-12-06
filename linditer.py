@@ -37,7 +37,7 @@ def LindIter(System, N):
             LindenmayerString = S
                           
          # for every iteration
-        for i in range(N-1):
+        for i in range(int(N)-1):
             # If c is not divisable with 1
             # Add 'L' + replacement string S
             add = ''

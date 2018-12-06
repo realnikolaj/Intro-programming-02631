@@ -6,20 +6,23 @@ Created on Wed Dec  5 21:28:42 2018
 @author: nik
 """
 
-from turtlegraph import*
-from linditer import*
-from inputNumber import*
-from displayNumber import*
+import numpy as np
+from turtlegraph import turtleGraph
+from turtleplot import turtlePlot
+from linditer import LindIter
+from displayMenu import displayMenu
+
+
 
 
 # Define main menu options
-menuItems = np.array(["System menu", "Generate Plot", "Quit"])
+mainItems = np.array(["System menu", "Generate Plot", "Quit"])
 
 # Define sub menu "systems"
-systemsItems = np.array(["Korch", "Sierpinski", "Iterations", "Return"])
+systemItems = np.array(["Korch", "Sierpinski", "Generate plot", "Return"])
 
 # Define sub menu "iterations"
-systemsItems = np.array(["1", "2", "3"])
+iterations = np.array(["'Lame'", "'Baby steps'", "'Looking good'", "'Not too shaby", "'That's ehmm something'", "'Maybe consider turning around", "'Enough now", "'This is serious'", "'You asked for it'"])
 
 
 # Display main menu
@@ -28,11 +31,11 @@ while True:
     # Display the title of the current menu
     print("Main menu")
     # Display menu options and ask user to choose a menu item
-    Choice = displayMenu(menuItems)
+    mainChoice = displayMenu(mainItems)
     # Menu item chosen
 
     # 1. Choose system and iterations
-    if choice == 1:
+    if mainChoice == 1:
         
         
         
@@ -43,16 +46,93 @@ while True:
             
             if systemChoice == 1:
                 System = systemItems[0]
+                
+                while True:
+                    Nchoice = displayMenu(iterations)
+                    print('Selecet number of iterations')
+                    
+                    if Nchoice == 1:
+                        N = 1
+                        break
+                    elif Nchoice == 2:
+                        N = 2
+                        break
+                    elif Nchoice == 3:
+                        N = 3
+                        break
+                    elif Nchoice == 4:
+                        N = 4
+                        break
+                    elif Nchoice == 5:
+                        N = 5
+                        break
+                    elif Nchoice == 6:
+                        N = 6
+                        break
+                    elif Nchoice == 7:
+                        N = 7
+                        break
+                    elif Nchoice == 8:
+                        N = 8
+                        break
+                    elif Nchoice == 9:
+                        N = 9
+                        break
+                        
             elif systemChoice == 2:
-                System = systemsItems[1]
+                System = systemItems[1]
+                
+                while True:
+                    
+                    Nchoice = displayMenu(iterations)
+                    print('Selecet number of iterations') 
+                    if Nchoice == 1:
+                        N = 1
+                        break
+                    elif Nchoice == 2:
+                        N = 2
+                        break
+                    elif Nchoice == 3:
+                        N = 3
+                        break
+                    elif Nchoice == 4:
+                        N = 4
+                        break
+                    elif Nchoice == 5:
+                        N = 5
+                        break
+                    elif Nchoice == 6:
+                        N = 6
+                        break
+                    elif Nchoice == 7:
+                        N = 7
+                        break
+                    elif Nchoice == 8:
+                        N = 9
+                        break
+                    elif Nchoice == 9:
+                        N = 11
+                        break
+                        
             elif systemChoice == 3:
-                N = input('Please input number of iterations')
+                
+                # Is name empty?
+                if System == "":
+                    # Display error message
+                    print("Error: No system selected")
+                elif N < 0:
+                    # Display error message
+                    print('Not possible to display negative order')
+                else:
+                    # Display plot
+                    turtlePlot(turtleGraph(LindIter(System, N), N), System, N)
+                    break
             elif systemChoice == 4:
                 break
             
 
     # 2. Generate plots
-    elif choice == 2:
+    elif mainChoice == 2:
         
         # Is name empty?
         if System == "":
@@ -63,9 +143,9 @@ while True:
             print('Not possible to display negative order')
         else:
             # Display plot
-            turtlePlot(turtleGraph(LindIter(System, N)), System, N)
+            turtlePlot(turtleGraph(LindIter(System, N), N), System, N)
             
 
     # 3. Quit
-    elif choice == 3:
+    elif mainChoice == 3:
         break

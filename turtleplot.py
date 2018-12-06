@@ -7,6 +7,7 @@ Created on Wed Dec  5 21:30:48 2018
 """
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 
 def turtlePlot(turtleCommands, System, N):
@@ -38,6 +39,9 @@ def turtlePlot(turtleCommands, System, N):
         length = np.array( [turtleCommands[i] / (2)**N for i in range(len(turtleCommands)) if i % 2 == 0])
         System = 'Sierpinski'
     
+    if N %2 == 1 and N > 1 and System.lower() == 'sierpinski':
+        Orientation = np.dot([[np.cos(1/3*math.pi), -np.sin(1/3*math.pi)],[np.sin(1/3*math.pi), np.cos(1/3*math.pi)]], Orientation)
+    
 
     # Calculate next direction vector 'Orientation'
     for i in range(0,len(angles)):
@@ -52,11 +56,16 @@ def turtlePlot(turtleCommands, System, N):
         d = np.array( [[cos,-sin],[sin,cos]] )
 
 
+
         # Calculating the matrix.vector product for new orientation vector
         dot = np.array(np.dot(d, Orientation[:,i]),copy=False, subok=True, ndmin=2).T
         
         # Appending new orientation to array of orientaions
         Orientation = np.concatenate(( Orientation, dot), axis=1)
+        
+
+
+        
 
     
     # Calculates next coordinate sets and add it to xy array for plotting
