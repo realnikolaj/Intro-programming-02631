@@ -84,15 +84,15 @@ def turtlePlot(turtleCommands, System, N):
         xy = np.array( [[0,1], [0,0]] )
     
 
-        
+    # Plots the system in a graph 
     plt.plot(xy[0], xy[1])
     plt.title('System: {}, Iteration: {}'.format(System,N))
     plt.xlim([0, 1])
 
-    if System == 'Sierpinski' and len(turtleCommands) > 0:     
-        plt.ylim([0, ])
-    elif System == 'Korch' and len(turtleCommands) > 0:
-        plt.ylim([-0.2, ])
+#    if System == 'Sierpinski' and len(turtleCommands) > 0:     
+#        plt.ylim([0, ])
+#    elif System == 'Korch' and len(turtleCommands) > 0:
+#        plt.ylim([-0.2, ])
     plt.yticks([])
     plt.show()
     

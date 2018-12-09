@@ -19,17 +19,42 @@ from displayMenu import displayMenu
 mainItems = np.array(["System menu", "Generate Plot", "Quit"])
 
 # Define sub menu "systems"
-systemItems = np.array(["Korch", "Sierpinski", "Generate plot", "Return"])
+systemItems = np.array(["Korch", "Sierpinski", "Generate plot", "Set or change number of iteration",  "Return"])
 
-# Define sub menu "iterations"
-iterations = np.array(["'Lame'", "'Baby steps'", "'Looking good'", "'Not too shaby", "'That's ehmm something'", "'Maybe consider turning around", "'Enough now", "'This is serious'", "'You asked for it'"])
+# Setting empty variable for print statements
+System = ''
+N = 0
+
+# Define prt statements for empty filters
+prt_nosys = 'Currently no system entered'
+prt_no_n = 'Currently no iterations entered'
+prt_stat = 'Please choose a system name and enter number of iteration'
+
+# Define prt statements for active filters
+prt_asys = '{} system is selected'
+prt_an = '{} iterations applied'
+
+
 
 
 # Display main menu
 while True:
     
+    # Display current selections
+    if System == '' and N == 0:
+        print(prt_stat)
+    elif len(System) > 0 and N != 0: 
+        print(prt_asys.format(System))
+        print(prt_an.format(N))
+    elif len(System) > 0:
+        print(prt_asys.format(System))
+    elif N != 0:
+        print(prt_an.format(N))
+    
     # Display the title of the current menu
     print("Main menu")
+    
+        
     # Display menu options and ask user to choose a menu item
     mainChoice = displayMenu(mainItems)
     # Menu item chosen
@@ -38,96 +63,70 @@ while True:
     if mainChoice == 1:
         
         
-        
         while True:
+            
+            # Display current selections
+            if System == '' and N == 0:
+                print(prt_stat)
+            elif len(System) > 0 and N != 0: 
+                print(prt_asys.format(System))
+                print(prt_an.format(N))
+            elif len(System) > 0:
+                print(prt_asys.format(System))
+            elif N != 0:
+                print(prt_an.format(N))
+                
+            # Display the title of the current menu
+            print('Systems menu')
                 
             # Display submenu "systems"
             systemChoice = displayMenu(systemItems)
             
+
+            # 1.1 Korch selection
             if systemChoice == 1:
                 System = systemItems[0]
                 
                 while True:
-                    Nchoice = displayMenu(iterations)
-                    print('Selecet number of iterations')
                     
-                    if Nchoice == 1:
-                        N = 1
-                        break
-                    elif Nchoice == 2:
-                        N = 2
-                        break
-                    elif Nchoice == 3:
-                        N = 3
-                        break
-                    elif Nchoice == 4:
-                        N = 4
-                        break
-                    elif Nchoice == 5:
-                        N = 5
-                        break
-                    elif Nchoice == 6:
-                        N = 6
-                        break
-                    elif Nchoice == 7:
-                        N = 7
-                        break
-                    elif Nchoice == 8:
-                        N = 8
-                        break
-                    elif Nchoice == 9:
-                        N = 9
-                        break
-                        
-            elif systemChoice == 2:
+                    # Prombt user for number of iterations
+                    N = int(input("Enter number of iterations: "))
+                    break
+                    
+            # 1.2 Sierpinski selection
+            elif systemChoice == 2:             
                 System = systemItems[1]
                 
+                # Prombt user for number of iterations
                 while True:
-                    
-                    Nchoice = displayMenu(iterations)
-                    print('Selecet number of iterations') 
-                    if Nchoice == 1:
-                        N = 1
-                        break
-                    elif Nchoice == 2:
-                        N = 2
-                        break
-                    elif Nchoice == 3:
-                        N = 3
-                        break
-                    elif Nchoice == 4:
-                        N = 4
-                        break
-                    elif Nchoice == 5:
-                        N = 5
-                        break
-                    elif Nchoice == 6:
-                        N = 6
-                        break
-                    elif Nchoice == 7:
-                        N = 7
-                        break
-                    elif Nchoice == 8:
-                        N = 9
-                        break
-                    elif Nchoice == 9:
-                        N = 11
-                        break
-                        
+                     N = int(input("Enter number of iterations: "))
+                     break
+                 
+            # 1.3 Generate plot
             elif systemChoice == 3:
                 
-                # Is name empty?
+                # Display error message if no system entered
                 if System == "":
-                    # Display error message
+                    
                     print("Error: No system selected")
+                    
+                # Display error message if user entered zero
                 elif N < 0:
-                    # Display error message
+                    
+                    
                     print('Not possible to display negative order')
                 else:
+                    
                     # Display plot
                     turtlePlot(turtleGraph(LindIter(System, N), N), System, N)
                     break
+            
+            # 1.4 Prombt user for number of iterations
             elif systemChoice == 4:
+                N = int(input("Enter number of iterations "))
+                
+            # 1.4 Quit the submenu
+            elif systemChoice == 5:
                 break
             
 
@@ -145,7 +144,10 @@ while True:
             # Display plot
             turtlePlot(turtleGraph(LindIter(System, N), N), System, N)
             
+#    # 3. Export as filetype
+#    elif mainChoice == 3:
+#        user = input('Hi')
 
-    # 3. Quit
-    elif mainChoice == 3:
+    # 4. Quit
+    elif mainChoice == 4:
         break
