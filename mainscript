@@ -11,6 +11,9 @@ from turtlegraph import turtleGraph
 from turtleplot import turtlePlot
 from linditer import LindIter
 from displayMenu import displayMenu
+import matplotlib.style as mplstyle
+mplstyle.use('fast')
+
 
 
 
@@ -149,5 +152,5 @@ while True:
 #        user = input('Hi')
 
     # 4. Quit
-    elif mainChoice == 4:
+    elif mainChoice == 3:
         break
