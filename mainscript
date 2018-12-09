@@ -8,125 +8,106 @@ Created on Wed Dec  5 21:28:42 2018
 
 import numpy as np
 from turtlegraph import turtleGraph
-from turtleplot import turtlePlot
+from turtleplot import turtlePlot, saveFig
 from linditer import LindIter
 from displayMenu import displayMenu
-import matplotlib.style as mplstyle
-mplstyle.use('fast')
+import os
 
-
-
-
-
-# Define main menu options
-mainItems = np.array(["System menu", "Generate Plot", "Quit"])
-
-# Define sub menu "systems"
+# Define menu options
+# for main and sub Systems menu
+mainItems = np.array(["System menu", "Generate Plot", 'Save plot', "Quit"])
 systemItems = np.array(["Korch", "Sierpinski", "Generate plot", "Set or change number of iteration",  "Return"])
 
-# Setting empty variable for print statements
+# Setting empty variable for asserting if static print statements needs displayed
 System = ''
 N = 0
 
-# Define prt statements for empty filters
-prt_nosys = 'Currently no system entered'
-prt_no_n = 'Currently no iterations entered'
-prt_stat = 'Please choose a system name and enter number of iteration'
-
+# Define welcome statement
+# Define set of print statements for if user tries to plot without any system or incorrect iterations entered
 # Define prt statements for active filters
+prt_stat = 'Please choose a system and enter number of iteration'
+prt_stat2 = 'Please enter number of iteration'
+prt_stat3 = 'Please choose a system'
+prt_nosys2 = 'Error: No system selected, please go to systems menu to select one'
+prt_neg_n = 'Not possible to display negative order'
 prt_asys = '{} system is selected'
 prt_an = '{} iterations applied'
-
-
-
 
 # Display main menu
 while True:
     
-    # Display current selections
+    # Display current system selections
     if System == '' and N == 0:
         print(prt_stat)
-    elif len(System) > 0 and N != 0: 
+    elif len(System) > 0 and N == 0: 
         print(prt_asys.format(System))
         print(prt_an.format(N))
-    elif len(System) > 0:
+        print(prt_stat2)
+    elif len(System) > 0 and N > 0:
         print(prt_asys.format(System))
+        print(prt_an.format(N))
+    elif len(System) == 0 and N > 0:
+        print(prt_an.format(N))
+        print(prt_stat3)
     elif N != 0:
         print(prt_an.format(N))
     
-    # Display the title of the current menu
+    # Display and show title of the main menu
     print("Main menu")
-    
-        
-    # Display menu options and ask user to choose a menu item
     mainChoice = displayMenu(mainItems)
-    # Menu item chosen
 
-    # 1. Choose system and iterations
+    # 1. Selects system sub menu
     if mainChoice == 1:
-        
         
         while True:
             
-            # Display current selections
+            # Display current system selections
             if System == '' and N == 0:
                 print(prt_stat)
-            elif len(System) > 0 and N != 0: 
+            elif len(System) > 0 and N == 0: 
                 print(prt_asys.format(System))
                 print(prt_an.format(N))
-            elif len(System) > 0:
+                print(prt_stat2)
+            elif len(System) > 0 and N > 0:
                 print(prt_asys.format(System))
+                print(prt_an.format(N))
+            elif len(System) == 0 and N > 0:
+                print(prt_an.format(N))
+                print(prt_stat3)
             elif N != 0:
                 print(prt_an.format(N))
                 
-            # Display the title of the current menu
-            print('Systems menu')
-                
-            # Display submenu "systems"
+            # Display and show title of the sub menu
+            print('System menu')
             systemChoice = displayMenu(systemItems)
-            
 
-            # 1.1 Korch selection
+            # 1.1 Selects the Korch system
             if systemChoice == 1:
                 System = systemItems[0]
-                
-                while True:
                     
-                    # Prombt user for number of iterations
-                    N = int(input("Enter number of iterations: "))
-                    break
-                    
-            # 1.2 Sierpinski selection
+            # 1.2 Selects the Sierpinski system
             elif systemChoice == 2:             
                 System = systemItems[1]
-                
-                # Prombt user for number of iterations
-                while True:
-                     N = int(input("Enter number of iterations: "))
-                     break
                  
             # 1.3 Generate plot
             elif systemChoice == 3:
                 
-                # Display error message if no system entered
-                if System == "":
-                    
-                    print("Error: No system selected")
-                    
-                # Display error message if user entered zero
+                # Displays error messages if no system or
+                # incorrect number of iterations entered.
+                # If no issue found then generate and display plot
+                if System == "" and N < 0:
+                    print(prt_nosys2)
+                    print(prt_neg_n)
+                elif System == "":
+                    print(prt_nosys2)
                 elif N < 0:
-                    
-                    
-                    print('Not possible to display negative order')
+                    print(prt_neg_n)
                 else:
-                    
-                    # Display plot
                     turtlePlot(turtleGraph(LindIter(System, N), N), System, N)
-                    break
             
             # 1.4 Prombt user for number of iterations
             elif systemChoice == 4:
-                N = int(input("Enter number of iterations "))
+                N = int(input("Enter number of iterations: "))
                 
             # 1.4 Quit the submenu
             elif systemChoice == 5:
@@ -136,21 +117,39 @@ while True:
     # 2. Generate plots
     elif mainChoice == 2:
         
-        # Is name empty?
-        if System == "":
-            # Display error message
-            print("Error: No system selected")
+        # Displays error messages if no system or
+        # incorrect number of iterations entered.
+        # If no issue found generate and display plot
+        if System == "" and N < 0:
+            print(prt_nosys2)
+            print(prt_neg_n)
+        elif System == "":
+            print(prt_nosys2)
         elif N < 0:
-            # Display error message
-            print('Not possible to display negative order')
+            print(prt_neg_n)
         else:
-            # Display plot
             turtlePlot(turtleGraph(LindIter(System, N), N), System, N)
             
-#    # 3. Export as filetype
-#    elif mainChoice == 3:
-#        user = input('Hi')
+    # 3. Export as filetype
+    elif mainChoice == 3:
+        fileName = ''
+        # Displays error messages if no system or
+        # incorrect number of iterations entered.
+        # If no issue found generate and display plot
+        if System == "" and N < 0:
+            print(prt_nosys2)
+            print(prt_neg_n)
+        elif System == "":
+            print(prt_nosys2)
+        elif N < 0:
+            print(prt_neg_n)
+        else:
+            print('Filetypes supported: PNG, PDF, SVG or PS')
+            fileName = input('Enter filename and filetype in like "name.filetype": ') 
+            saveFig(turtlePlot(turtleGraph(LindIter(System, N), N), System, N), System, N, fileName)
+            print('File {} saved to{}'.format(fileName, os.getcwd()))
+
 
     # 4. Quit
-    elif mainChoice == 3:
+    elif mainChoice == 4:
         break

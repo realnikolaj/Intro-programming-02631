@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt
 import math
 
 
+
 def turtlePlot(turtleCommands, System, N):
-    
     
     # Initial starting point at origo
     # This array will grow with iterations
@@ -22,11 +22,9 @@ def turtlePlot(turtleCommands, System, N):
     # Used for calculating next coordinate
     Orientation = np.array( [[1], [0]] )
     
-    
     # Finds every angle in the turtleCommands string 
     # and creates a single array for accessing angles
     angles = np.array([turtleCommands[i] for i in range(len(turtleCommands)) if i % 2 == 1])
-    
     
     # Shorten line segment lengths according to system
     # Will assess if system is korch or sierpinski
@@ -41,7 +39,6 @@ def turtlePlot(turtleCommands, System, N):
     
     if N %2 == 1 and N > 1 and System.lower() == 'sierpinski':
         Orientation = np.dot([[np.cos(1/3*math.pi), -np.sin(1/3*math.pi)],[np.sin(1/3*math.pi), np.cos(1/3*math.pi)]], Orientation)
-    
 
     # Calculate next direction vector 'Orientation'
     for i in range(0,len(angles)):
@@ -55,18 +52,11 @@ def turtlePlot(turtleCommands, System, N):
         # Using before-assigned cos and sin function where i in angle parsed from angles array
         d = np.array( [[cos,-sin],[sin,cos]] )
 
-
-
         # Calculating the matrix.vector product for new orientation vector
         dot = np.array(np.dot(d, Orientation[:,i]),copy=False, subok=True, ndmin=2).T
         
         # Appending new orientation to array of orientaions
         Orientation = np.concatenate(( Orientation, dot), axis=1)
-        
-
-
-        
-
     
     # Calculates next coordinate sets and add it to xy array for plotting
     for i in range(0,len(length)):
@@ -75,15 +65,13 @@ def turtlePlot(turtleCommands, System, N):
         vector = np.array(xy[:,i]+length[i]*Orientation[:,i], copy=False, subok=True, ndmin=2).T
 
         # Adding the new vector to'xy' array
-        xy = np.concatenate((xy, vector), axis=1)
-        
+        xy = np.concatenate((xy, vector), axis=1)      
 
     # Deals with zero iterations ie. N=0
     # Will draw a horizontal line for both systems if N<1
     if len(turtleCommands) < 1:
         xy = np.array( [[0,1], [0,0]] )
     
-
     # Plots the system in a graph 
     plt.plot(xy[0], xy[1])
     plt.title('System: {}, Iteration: {}'.format(System,N))
@@ -96,10 +84,14 @@ def turtlePlot(turtleCommands, System, N):
     plt.yticks([])
     plt.show()
     
-    return
+    return xy
 
-        
+import matplotlib
+matplotlib.use('Agg')
 
-# Below line is for testing purpose
-# [print('Coordinates for {}-vector, is {}'.format(i, korch2[:,i])) for i in range(0,16)]    
+def saveFig(xy, System, N, fileName):
+    
+    plt.plot(xy[0],xy[1])
+    plt.title('System: {}, Iteration: {}'.format(System,N))
+    plt.savefig(fileName)
     

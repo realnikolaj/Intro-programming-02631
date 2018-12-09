@@ -5,9 +5,12 @@ Created on Mon Nov 19 14:54:01 2018
 
 @author: nik
 """
-#import numpy as np
 
-
+#
+# Creates a string out of a given alphabet for a given system on a given
+# amount of iterations. Will create extremely long strings 
+# if iterations is large
+#
 def LindIter(System, N):
     S = 'SLSRSLS'
     B = 'ALBLA'
@@ -20,29 +23,21 @@ def LindIter(System, N):
     # Defining output string for Korchs system
     if System.lower() == 'korch':
         
-        
-        
-        
-                 
-         # Counter for next iterative action
-         #  c = 0
-  
-         # If N == 0 do nothing
+        # If N == 0 (no iterations selected) create empty string to return
         if N == 0:
              
             LindenmayerString = '' 
              
-         # Otherwise set LindemayerString variable to first iteration     
+        # Otherwise set string to first iteration
         else:
             LindenmayerString = S
                           
-         # for every iteration
+        # for N iteration
+        # Reads string and performs replacements
         for i in range(int(N)-1):
-            # If c is not divisable with 1
-            # Add 'L' + replacement string S
+            
             add = ''
             for letter in LindenmayerString:
-                
 
                 if letter == 'S':
                      add += S
@@ -52,19 +47,21 @@ def LindIter(System, N):
                     add += R
                 LindenmayerString = add
                     
-     # Defining output string for the Sierpinski system            
+    # Defining output string for the Sierpinski system            
     if System.lower() == 'sierpinski':
             
-    
+        # If N == 0 (no iterations selected) create empty string to return 
         if N == 0:
             
             LindenmayerString = '' 
-                 
+          
+        # Otherwise set string to first iteration
         else:
                  
             LindenmayerString = 'BRARB'
                  
-        
+        # for N iteration
+        # Reads string and performs replacements
         for i in range(N-1):
             
                     
